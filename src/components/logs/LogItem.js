@@ -4,7 +4,7 @@ import enUS from 'date-fns/locale/en-US';
 import PropTypes from 'prop-types';
 
 const LogItem = ({ log }) => {
-  const formatedDate = format(new Date(log.date), 'MMM do yyyy, hh:mm aaa' , {
+  const formatedDate = format(new Date(log.date), 'MMM do yyyy, HH:mm bbb' , {
     locale: enUS,
   });
   return (
