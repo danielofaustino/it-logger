@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const SearchBar = () => {
   return (
-    <nav style={{ marginBottom: '30px' }} className="blue">
+    <nav style={{ marginBottom: '2rem' }} className="blue">
       <div className="nav-wrapper">
         <form>
           <div className="input-field">
