@@ -1,11 +1,20 @@
 import React from 'react';
 import format from 'date-fns/format';
-import enUS from 'date-fns/locale/en-US';
-import PropTypes from 'prop-types';
+import ptBR from 'date-fns/locale/en-US';
 
-const LogItem = ({ log }) => {
-  const formatedDate = format(new Date(log.date), 'MMM do yyyy, HH:mm bbb' , {
-    locale: enUS,
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { deleteLog } from '../../actions/logActions';
+
+import M from 'materialize-css/dist/js/materialize.min.js';
+
+const LogItem = ({ log, deleteLog }) => {
+  const onDelete = () => {
+    deleteLog(log.id);
+    M.toast({ html: 'Log Deleted' });
+  };
+  const formatedDate = format(new Date(log.date), 'MMM do yyyy, HH:mm bbb', {
+    locale: ptBR,
   });
   return (
     <li className="collection-item">
@@ -24,7 +33,9 @@ const LogItem = ({ log }) => {
           <span className="black-text">{log.tech}</span> on{' '}
           <span>{formatedDate}</span>
         </span>
-        <a href="#!" className="secondary-content"><i className="material-icons grey-text">delete</i></a>
+        <a href="#!" onClick={onDelete} className="secondary-content">
+          <i className="material-icons grey-text">delete</i>
+        </a>
       </div>
     </li>
   );
@@ -32,6 +43,7 @@ const LogItem = ({ log }) => {
 
 LogItem.propTypes = {
   log: PropTypes.object.isRequired,
+  deleteLog: PropTypes.func.isRequired,
 };
 
-export default LogItem;
+export default connect(null, { deleteLog })(LogItem);
